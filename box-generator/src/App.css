@@ -23,5 +23,6 @@
 }
 .button {
   padding: 1px 15px;
-  background-color: skyblue;
+  background-color: lightgrey;
+  border: 2px solid black;
 }
