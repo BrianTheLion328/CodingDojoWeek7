@@ -5,17 +5,15 @@ const Form = () => {
     const [color, setColor] = useState("");
     const [colorBoxes, setColorBoxes] = useState([])
 
-
-    // const COLOR_BOXES = [
-    //     "blue", "yellow", "red"
-    // ];
-
     const createBox = (e) => {
         e.preventDefault();
 
         const newColor = color
 
-        // colorBoxes.push(newColor)
+        // NOTE: USING AN ARRAY IN YOUR USESTATE VALUE AND
+        // THEN USING THE SPREAD OPERATOR IS THE EQUIVALENT
+        // OF PUSHING INTO AN ARRAY! :)
+
         setColorBoxes([...colorBoxes, newColor])
 
         console.log("NEW COLOR: ", newColor)
@@ -28,12 +26,12 @@ const Form = () => {
     return (
         <div className="color-form">
             <div>
-                <form onSubmit={ createBox }>
+                <form className="color-inputs" onSubmit={ createBox }>
                     <div>
                         <label>Color: </label>
                         <input type="text" onChange={(e) => setColor(e.target.value)} value={ color } />
                     </div>
-                    <input type="submit" value="Add" />
+                    <input className="button" type="submit" value="Add" />
                 </form>
             </div>
 
