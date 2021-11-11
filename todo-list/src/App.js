@@ -1,5 +1,6 @@
 import React, { useState, useReducer} from 'react'
 import Todo from './Components/Todo';
+import './App.css'
 
 
 export const ACTIONS = {
@@ -46,12 +47,14 @@ const handleSubmit = (e) => {
 }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="App">
+      <form className="form-input" onSubmit={handleSubmit}>
         <label>Enter a new todo</label>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <input type="submit" value="Add Todo"/>
       </form>
-      <div>
+      <p>Pink = incomplete | Blue = complete</p>
+      <div className="all-todos">
         {todos.map((todo, id) => {
           return <Todo key={id} todo={todo} dispatch={dispatch}/>
         })}
