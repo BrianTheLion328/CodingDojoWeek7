@@ -1,10 +1,11 @@
-import React, { useReducer, useState } from 'react';
-import './App.css';
+import React, { useState, useReducer} from 'react'
 import Todo from './Components/Todo';
 
-const ACTIONS = {
-  ADD_TODO: "add-todo",
-  TOGGLE_TODO: "toggle-todo"
+
+export const ACTIONS = {
+  ADD_TODO: 'add-todo',
+  TOGGLE_TODO: 'toggle-todo',
+  DELETE_TODO: 'delete-todo'
 }
 
 function reducer(todos, action) {
@@ -12,41 +13,49 @@ function reducer(todos, action) {
     case ACTIONS.ADD_TODO:
       return [...todos, newTodo(action.payload.name)]
     case ACTIONS.TOGGLE_TODO:
-      return [...todos, ]
+      return todos.map(todo => {
+        if (todo.id === action.payload.id){
+          return {...todo, complete: !todo.complete}
+        } else {
+          return todo;
+        }
+      })
+    case ACTIONS.DELETE_TODO:
+        return todos.filter(todo => todo.id !== action.payload.id)
     default:
       return todos
   }
 }
 
 function newTodo(name) {
-  return { id: Date.now(), name: name, complete: false }
+  return (
+    {id: Date.now(), name: name, complete: false}
+  )
 }
 
-function App() {
-  const [todos, dispatch] = useReducer(reducer, [])
+export default function App() {
   const [name, setName] = useState("")
+  const [todos, dispatch] = useReducer(reducer, [])
 
-  function handleSubmit(e) {
-    e.preventDefault()
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    dispatch({type: ACTIONS.ADD_TODO, payload: { name: name }})
-    setName("")
+  dispatch( {type: ACTIONS.ADD_TODO, payload: { name: name} } )
 
-  }
-
-  console.log(todos)
+  setName("")
+}
 
   return (
-    <div className="App">
+    <div>
       <form onSubmit={handleSubmit}>
-        <label>Enter a new Todo item: </label>
+        <label>Enter a new todo</label>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
       </form>
-      {todos.map(todo => {
-        <Todo key={todo.id} todo={todo} />
-      })}
+      <div>
+        {todos.map((todo, id) => {
+          return <Todo key={id} todo={todo} dispatch={dispatch}/>
+        })}
+      </div>
     </div>
-  );
+  )
 }
-
-export default App;
