@@ -22,7 +22,6 @@ const Form = () => {
         setColor("");
     }
 
-
     return (
         <div className="color-form">
             <div>
