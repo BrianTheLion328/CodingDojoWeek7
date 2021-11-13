@@ -53,7 +53,7 @@ const handleSubmit = (e) => {
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         <input type="submit" value="Add Todo"/>
       </form>
-      <p>Pink = incomplete | Blue = complete</p>
+      <p>Pink = incomplete | Blue = completed</p>
       <div className="all-todos">
         {todos.map((todo, id) => {
           return <Todo key={id} todo={todo} dispatch={dispatch}/>
