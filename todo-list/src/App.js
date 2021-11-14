@@ -49,7 +49,7 @@ const handleSubmit = (e) => {
   return (
     <div className="App">
       <form className="form-input" onSubmit={handleSubmit}>
-        <label>Enter a new todo</label>
+        <label>Enter a New Todo</label>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         <input type="submit" value="Add Todo"/>
       </form>
